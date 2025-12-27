@@ -1,31 +1,35 @@
-# Stock Prices API
+# Stock Prices API 📈
 
-A lightweight FastAPI microservice that exposes stock price data stored in PostgreSQL.  
-This project is designed as a portfolio piece to demonstrate data engineering + backend API skills.
-
-It is intended to be used together with my other project:
-
-- **Stock Market Data Pipeline** – ETL pipeline that ingests daily prices into PostgreSQL.
+A FastAPI-based microservice that serves stock market data from Postgres.  
+Built as part of my data engineering learning portfolio.
 
 ---
 
 ## Features
 
-- ✅ REST API built with **FastAPI**
-- ✅ Connects to **PostgreSQL** (Docker container)
-- ✅ Serves data originally ingested by an ETL pipeline
-- ✅ Endpoints for:
-  - Listing all available stock symbols
-  - Getting latest price for a symbol
-  - Querying historical prices (with optional date range)
-  - Getting summary statistics (min / max / average / latest price)
+- FastAPI backend with REST endpoints
+- PostgreSQL data storage
+- Fetch latest stock price
+- Price history for any symbol
+- Summary stats (min/max/avg/latest)
+- Fully documented via `/docs`
 
 ---
 
-## Architecture
+## Endpoints
 
-**High-level flow:**
+| Method | Endpoint | Description |
+|-------|----------|-------------|
+| GET | `/health` | Check service status |
+| GET | `/symbols` | List available stocks |
+| GET | `/prices/{symbol}/latest` | Latest closing price |
+| GET | `/prices/history?symbol=AAPL` | Full price history |
+| GET | `/summary/AAPL` | Summary stats |
 
-```text
-ETL Pipeline (separate project) → PostgreSQL (stock_db) → FastAPI (this project) → Client / Dashboard
+---
+
+## Run locally
+
+```bash
+uvicorn app.main:app --reload
 
